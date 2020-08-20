@@ -1,0 +1,39 @@
+header{
+    background-color:darkblue;
+    div{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+        #home-heading{
+            i{
+                margin-left: 5%;
+                margin-top: 12%;
+                font-size: 2.5rem;
+                color: whitesmoke;
+            }
+            h1{
+                margin-left: 5%;
+                color: whitesmoke;
+            }
+        }
+        #home-list{
+            margin-top: 25px;
+            ul{
+                list-style: none;
+                display: contents;
+                
+                li{
+                    display: inline-block;
+                    margin-right: 8px;
+                    float: right;
+                    a{
+                        text-decoration: none;
+                        font-size: 1.2rem;
+                        color: whitesmoke;
+                    }
+                }
+            }
+        }   
+    }   
+}

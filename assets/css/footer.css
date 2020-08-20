@@ -1,0 +1,28 @@
+footer {
+  background-color: gray;
+}
+
+footer div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+footer div #footer-heading {
+  margin-top: 25px;
+}
+
+footer div #footer-heading i {
+  color: whitesmoke;
+  font-size: 1.05rem;
+}
+
+footer div #footer-list ul {
+  list-style: none;
+}
+
+footer div #footer-list ul li a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: whitesmoke;
+}
