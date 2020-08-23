@@ -1,11 +1,16 @@
 const User = require('../models/user');
 const user = require('../models/user');
+const { profile } = require('./admin_controller');
 
 module.exports.profile = function(req,res){
 
-    return res.render('users_profile', {
-        title : "Profile"
+    User.findById(req.params.id, function(err,user){
+        return res.render('users_profile', {
+            title : "User Profile",
+            profile_user : user
+        })
     })
+   
     //res.end('<h1>User Profile</h1>');
 }
 

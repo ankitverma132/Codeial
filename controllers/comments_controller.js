@@ -25,3 +25,24 @@ module.exports.create = function(req,res){
         }
     });
 }
+
+module.exports.destroy = function(req,res){
+    Comment.findById(req.params.id, function(err,comment){
+        if( comment.user == req.user.id ){
+            //Before deleting comment we need to fetch comment
+            //id so that we can go into comment in comments
+            //array of post
+            //Save post id and comment id as we will need that
+            let postId = comment.post;
+            comment.remove();
+            //In post schema
+            //pull the comment from comments array using mongodb syntax
+            Post.findByIdAndUpdate(postId, {$pull : {comments : req.params.id}}, function(err,post){
+                return res.redirect('back');   
+            })
+        }else{
+            //Comment doesn't find
+            return res.redirect('back');
+        }
+    })
+}

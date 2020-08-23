@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 const { populate } = require('../models/post');
 //module.export.actionName = function(req,res){};
 
@@ -25,10 +26,14 @@ module.exports.home = function(req,res){
         }
     })
     .exec(function(err,posts){
-        return res.render('home', {
-                    title : "Codeial | Home",
-                    posts : posts
-         });
+        //Sending all users to show friends
+        User.find({}, function(err, users){
+            return res.render('home', {
+                title : "Codeial | Home",
+                posts : posts,
+                all_users : users
+             });
+        }); 
     })
 
    // return res.end('<h1>Express is up for Codeial!</h1>');

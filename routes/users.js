@@ -6,7 +6,7 @@ const usersController = require('../controllers/users_controller');
 const { route } = require('.');
 
 //Make profile page accessible only if user is signed in
-router.get('/profile',passport.checkAuthentication, usersController.profile);
+router.get('/profile/:id',passport.checkAuthentication, usersController.profile);
 
 router.get('/posts',usersController.posts);
 
