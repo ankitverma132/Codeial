@@ -8,6 +8,8 @@ const { route } = require('.');
 //Make profile page accessible only if user is signed in
 router.get('/profile/:id',passport.checkAuthentication, usersController.profile);
 
+router.post('/update/:id',passport.checkAuthentication, usersController.update);
+
 router.get('/posts',usersController.posts);
 
 router.get('/sign-up', usersController.signUp);

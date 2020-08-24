@@ -21,6 +21,7 @@
     prefix : '/css'
  }));
  
+ //For cookies
  app.use(express.urlencoded());
  app.use(cookieParser());
  app.use(express.static('./assets'));
