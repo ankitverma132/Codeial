@@ -14,10 +14,18 @@
 
  //Place it before server starts as files needs to be compiled first
  app.use(sassMiddleware({
+    //Take scss code from here
     src : './assets/scss',
+    //Put css code here
     dest : './assets/css',
+    //Whether you want to show error
+    // during compilation on terminal
     debug : true,
+    //Do you want it to be in 
+    //single or multiple lines
     outputStyle : 'expanded',
+    //Where should my server
+    // look for css file
     prefix : '/css'
  }));
  

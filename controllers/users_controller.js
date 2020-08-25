@@ -2,6 +2,7 @@ const User = require('../models/user');
 const user = require('../models/user');
 const { profile } = require('./admin_controller');
 
+//keep it same ie dont add async await
 module.exports.profile = function(req,res){
 
     User.findById(req.params.id, function(err,user){
