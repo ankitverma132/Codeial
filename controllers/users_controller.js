@@ -87,11 +87,13 @@ module.exports.create = function(req,res){
 //Get the signin data
 module.exports.createSession = function(req,res){
     //Todo later
+    req.flash('success', 'Logged In Successfully');
     return res.redirect('/');
 }
 
 module.exports.destroySession = function(req,res){
     // Function given by passportjs to req
     req.logout(); 
+    req.flash('success', 'You Have Logged Out');
     return res.redirect('/');
 }
