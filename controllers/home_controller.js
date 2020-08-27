@@ -40,6 +40,7 @@ module.exports.home = async function(req,res){
     try{
         //Using async/await
         let posts = await Post.find({})
+        .sort('-createdAt')
         .populate('user')
         //Need to populate multiple models, first 
         //comments and then user of the comment
@@ -61,6 +62,7 @@ module.exports.home = async function(req,res){
     }
     catch{
         console.log("Error", err);
+        return;
     }
     
     //Using then

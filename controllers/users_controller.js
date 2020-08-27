@@ -9,8 +9,8 @@ module.exports.profile = function(req,res){
         return res.render('users_profile', {
             title : "User Profile",
             profile_user : user
-        })
-    })
+        });
+    });
    
     //res.end('<h1>User Profile</h1>');
 }
@@ -18,18 +18,20 @@ module.exports.profile = function(req,res){
 module.exports.update = function(req,res){
     if(req.user.id == req.params.id){
         User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+            req.flash('success', 'Updated!');
             return res.redirect('back');
         })
     }else{
         //If user doesn't match
+        req.flash('error', 'Unauthorized!');
         return res.status(401).send('Unauthorized');
     }
 }
 
 
-module.exports.posts = function(req,res){
-    res.end('<h1>These are Users Post...!!</h1>');
-}
+// module.exports.posts = function(req,res){
+//     res.end('<h1>These are Users Post...!!</h1>');
+// }
 
 //To render sign up page
 module.exports.signUp = function(req,res){
@@ -57,20 +59,23 @@ module.exports.create = function(req,res){
     if(req.body.password != req.body.confirm_password){
         
         //We're redirct back to sign up page
+        req.flash('error', 'Passwords do not match');
         return res.redirect('back');
     }
     user.findOne({
         email : req.body.email
     },function(err,user){
         if(err){
-           console.log('Error in finding user in signup'); 
+           //console.log('Error in finding user in signup'); 
+           req.flash('error', err);
            return;
         }
         if(!user){
             //If user not found create user
             User.create(req.body, function(err,user){
                 if(err){
-                    console.log('error in creating user while sign up');
+                   // console.log('error in creating user while sign up');
+                    req.flash('error', err);
                     return;
                 }
                 //Means user created now redirected to sign in
@@ -79,6 +84,8 @@ module.exports.create = function(req,res){
         }
         else{
             //If user already exists we're redirect back to sign up page
+            req.flash('success', 'You have signed up, login to continue!');
+
             return res.redirect('back');
         }
     })

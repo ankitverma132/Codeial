@@ -21,11 +21,13 @@ module.exports.create = async function(req,res){
                 //Update comment(add) in Comments array of post
                 post.comments.push(comment);
                 post.save(); 
+                req.flash('success', 'Comment published!');
                 res.redirect('/');
             } 
     }
     catch(err){
-        console.log("Error", err);
+        //console.log("Error", err);
+        req.flash('error', err);
         return;
     }
     // Post.findById(req.body.post, function(err,  post){
@@ -59,14 +61,18 @@ module.exports.destroy = async function(req,res){
                 //In post schema
                 //pull the comment from comments array using mongodb syntax
                 let post = Post.findByIdAndUpdate(postId, {$pull : {comments : req.params.id}});
+                req.flash('success', 'Comment deleted!');
                 return res.redirect('back');   
             }else{
                 //Comment doesn't find
+                req.flash('error', 'Unauthorized');
                 return res.redirect('back');
             }
     }
     catch(err){
-        console.log("Error",err);
+        //console.log("Error",err);
+        req.flash('error', err);
+        return;
     }
     // Comment.findById(req.params.id, function(err,comment){
     //     if( comment.user == req.user.id ){
