@@ -14,7 +14,10 @@
                    let newPost = newPostDom(data.data.post);
                    //console.log(newPost)
                    $('#posts-list-container>ul').prepend(newPost);
+                   req.flash('success', 'Logged In Successfully');
+
                    deletePost($(' .delete-post-button', newPost));
+                
                },error : function(error){
                    console.log(error.responseText);
                }
@@ -68,9 +71,5 @@
            })
        })
    }
-
-
-
-
      createPost();
 }
