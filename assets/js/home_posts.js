@@ -10,13 +10,19 @@
                url : '/posts/create',
                data : newPostForm.serialize(),
                success: function(data){
-                   //console.log(data);
+                  // console.log(data);
                    let newPost = newPostDom(data.data.post);
                    //console.log(newPost)
                    $('#posts-list-container>ul').prepend(newPost);
-                   req.flash('success', 'Logged In Successfully');
-
+                    
                    deletePost($(' .delete-post-button', newPost));
+                   new Noty({
+                        theme: 'relax',
+                        text: 'Post published!',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                  }).show();
                 
                },error : function(error){
                    console.log(error.responseText);

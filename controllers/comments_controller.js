@@ -16,11 +16,14 @@ module.exports.create = async function(req,res){
                     content : req.body.content,
                     post : req.body.post,
                     user :req.user._id
+                    
                 });
+               
                 //handle error
                 //Update comment(add) in Comments array of post
                 post.comments.push(comment);
                 post.save(); 
+                
                 req.flash('success', 'Comment published!');
                 res.redirect('/');
             } 
