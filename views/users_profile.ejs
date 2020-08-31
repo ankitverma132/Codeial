@@ -1,9 +1,11 @@
 <!-- Put just varibble part here and constant parts in layouts -->
 
 <link rel="stylesheet" href="/css/user_profile.css">
-<h1>
+<!-- <h1>
     This is Users / <%= title %>
-</h1>
+</h1> -->
+
+<img src="<%=user.avatar%>" alt="<%=user.name%>">
 
 <%if(user.id == profile_user.id){%>
   <!-- If user matches then show form else show only profile info -->
