@@ -46,7 +46,6 @@ userSchema.statics.uploadedAvatar = multer({storage : storage}).single('avatar')
 userSchema.statics.avatarPath = AVATAR_PATH;
     
 
-
 //Now we need to define which collection would use this schema
 const user = mongoose.model('User', userSchema );
 
