@@ -5,20 +5,22 @@ const User = require('../models/user');
 
 //Tell passposrt to use new strategy for google login
 passport.use(new googleStrategy({
-    clientID : "492842999210-jt71n1kuuojvp6pg82k0v1tq2q67bnf9.apps.googleusercontent.com",
-    clientSecret : "MATpvgXsTD0J4lJXd5jv5vPl",
-    callbackURL : "http://localhost:8000/user/auth/google/callback"
+    clientID : "492842999210-pknjmki9lfc66tfirq2cl2hurcq5pmb4.apps.googleusercontent.com",
+    clientSecret : "X-Xpd5cCEAq37lOQtz_eZSSu",
+    callbackURL : "http://localhost:8000/users/auth/google/callback"
 },
     function(accessToken, refreshToken, profile, done){
         //Find a user
         User.findOne({
             //Profile will have users information
-            email : profile.emails(0).value
+            email : profile.emails[0].value
         }).exec(function(err,user){
             if(err){
                 console.log('Error in google-strategy-passport', err);
                 return;
             }
+            console.log(accessToken,refreshToken);
+            console.log(profile);
             if(user){
                 //if found, set this user as req.user
                 return done(null,user);
