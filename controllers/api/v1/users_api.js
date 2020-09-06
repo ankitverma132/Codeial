@@ -2,6 +2,7 @@ const User = require('../../../models/user');
 const jwt = require('jsonwebtoken');
 
 //Get the signin data
+
 module.exports.createSession = async function(req,res){
     try{
         let user = await User.findOne({

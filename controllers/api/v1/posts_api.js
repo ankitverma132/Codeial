@@ -25,7 +25,6 @@ module.exports.index = async function(req,res){
 
 module.exports.destroy = async function(req,res){
     try{
-       
     let post = await Post.findById(req.params.id);  
     //For authorization
     if(post.user == req.params.id){
