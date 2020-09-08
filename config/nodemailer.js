@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 const ejs = require('ejs');
 const path = require('path');
 
@@ -12,15 +12,15 @@ let transporter = nodemailer.createTransport({
     secure : false,
     auth : {
         user : 'ankitv.ashokaec19@gmail.com',
-        pass : '**********'
+        pass : '******'
     }
 });
 
 //Now we need to define that  we will use ejs
 let renderTemplate = (data, relativePath) => {
     let mailHTML;
-    ejs.renderFile{
-        path.join(__dirname, '../views/mailers', relativePath);
+    ejs.renderFile(
+        path.join(__dirname, '../views/mailers', relativePath),
         data,
         function(err,template){
             if(err){
@@ -29,7 +29,7 @@ let renderTemplate = (data, relativePath) => {
             }
             mailHTML = template;
         }
-    }
+    )
     return mailHTML;
 }
 

@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const commentsMailer = require('../mailer/comments_mailer');
 
 module.exports.create = async function(req,res){
     //First verify post_id
@@ -18,11 +19,22 @@ module.exports.create = async function(req,res){
                     user :req.user._id
                     
                 });
-               
                 //handle error
                 //Update comment(add) in Comments array of post
                 post.comments.push(comment);
                 post.save(); 
+
+                comment = await comment.populate('user', 'name email').execPopulate();
+                commentsMailer.newComment(comment);
+
+                if(req.xhr){
+                    return res.status(200).json({
+                        data : {
+                            comment : comment
+                        },
+                        message : "Post created!"
+                    });
+                }
                 
                 req.flash('success', 'Comment published!');
                 res.redirect('/');
@@ -64,6 +76,17 @@ module.exports.destroy = async function(req,res){
                 //In post schema
                 //pull the comment from comments array using mongodb syntax
                 let post = Post.findByIdAndUpdate(postId, {$pull : {comments : req.params.id}});
+
+                // send the comment id which was deleted back to the views
+                if (req.xhr){
+                    return res.status(200).json({
+                        data: {
+                            comment_id: req.params.id
+                        },
+                        message: "Post deleted"
+                    });
+                }
+
                 req.flash('success', 'Comment deleted!');
                 return res.redirect('back');   
             }else{
