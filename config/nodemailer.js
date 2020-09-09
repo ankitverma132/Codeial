@@ -12,7 +12,7 @@ let transporter = nodemailer.createTransport({
     secure : false,
     auth : {
         user : 'ankitv.ashokaec19@gmail.com',
-        pass : '******'
+        pass : '*********'
     }
 });
 
@@ -24,7 +24,7 @@ let renderTemplate = (data, relativePath) => {
         data,
         function(err,template){
             if(err){
-                console.log('Error in rendering template');
+                console.log('Error in rendering template', err);
                 return; 
             }
             mailHTML = template;
